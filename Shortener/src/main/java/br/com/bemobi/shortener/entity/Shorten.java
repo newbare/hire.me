@@ -1,14 +1,21 @@
 package br.com.bemobi.shortener.entity;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * 
@@ -23,63 +30,57 @@ public class Shorten implements Serializable{
  
 	@Id
 	@GeneratedValue
-	@Column(name = "ID_URL")
-    public Long idUrl;
-    /**
-     * Limite de carecter
-     * Internet Explorer: 2.083 caracteres 
-     * Firefox: 65.536 caracteres
-     * Safari: 80.000 caracteres
-     * Opera: 190.000 caracteres
-     */
+	@Column(name = "ID")
+	@JsonIgnore
+    private Long id;
+    
+	@JsonIgnore
     @Column(name = "URL_LONGA")
-    public String longUrl;
+    private String defaultUrl;
     
-    @Column(name = "URL_CURTA")
-    public String shortUrl;
+	
     
-    
-	@Column(name = "CREATION_DATE")
-    public Date creationDate;  
-    
+	//@JsonIgnore
     @Column(name = "CLICK")
-    public Long click;  
+    private Long click;  
+	
+	@Transient
+	private String alias;
+	
+	@Transient
+	private String url;
     
-    @Transient
-    private String description;
+    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+    @JoinTable(name="SHORTEN_HAS_STATITICS", joinColumns={@JoinColumn(name="SHORTEN_ID", referencedColumnName="id")}, inverseJoinColumns={@JoinColumn(name="STATISTICS_ID", referencedColumnName="id")})
+    private List<Statistics> statistics;
 
-	public Long getIdUrl() {
-		return idUrl;
+    
+    public Shorten() {
+		// TODO Auto-generated constructor stub
+	}
+    
+	public Shorten(String defaultUrl, List<Statistics> statistics) {
+		super();
+		this.defaultUrl = defaultUrl;
+		this.statistics = statistics;
+	}
+	
+	public Long getId() {
+		return id;
 	}
 
-	public void setIdUrl(Long idUrl) {
-		this.idUrl = idUrl;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
-	public String getLongUrl() {
-		return longUrl;
+	public String getDefaultUrl() {
+		return defaultUrl;
 	}
 
-	public void setLongUrl(String longUrl) {
-		this.longUrl = longUrl;
+	public void setDefaultUrl(String defaultUrl) {
+		this.defaultUrl = defaultUrl;
 	}
-
-	public String getShortUrl() {
-		return shortUrl;
-	}
-
-	public void setShortUrl(String shortUrl) {
-		this.shortUrl = shortUrl;
-	}
-
-	public Date getCreationDate() {
-		return creationDate;
-	}
-
-	public void setCreationDate(Date creationDate) {
-		this.creationDate = creationDate;
-	}
-
+	
 	public Long getClick() {
 		return click;
 	}
@@ -88,63 +89,30 @@ public class Shorten implements Serializable{
 		this.click = click;
 	}
 
-	public String getDescription() {
-		return description;
+	public List<Statistics> getStatistics() {
+		return statistics;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setStatistics(List<Statistics> statistics) {
+		this.statistics = statistics;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((click == null) ? 0 : click.hashCode());
-		result = prime * result + ((creationDate == null) ? 0 : creationDate.hashCode());
-		result = prime * result + ((idUrl == null) ? 0 : idUrl.hashCode());
-		result = prime * result + ((longUrl == null) ? 0 : longUrl.hashCode());
-		result = prime * result + ((shortUrl == null) ? 0 : shortUrl.hashCode());
-		return result;
+	public String getAlias() {
+		return alias;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Shorten other = (Shorten) obj;
-		if (click == null) {
-			if (other.click != null)
-				return false;
-		} else if (!click.equals(other.click))
-			return false;
-		if (creationDate == null) {
-			if (other.creationDate != null)
-				return false;
-		} else if (!creationDate.equals(other.creationDate))
-			return false;
-		if (idUrl == null) {
-			if (other.idUrl != null)
-				return false;
-		} else if (!idUrl.equals(other.idUrl))
-			return false;
-		if (longUrl == null) {
-			if (other.longUrl != null)
-				return false;
-		} else if (!longUrl.equals(other.longUrl))
-			return false;
-		if (shortUrl == null) {
-			if (other.shortUrl != null)
-				return false;
-		} else if (!shortUrl.equals(other.shortUrl))
-			return false;
-		return true;
+	public void setAlias(String alias) {
+		this.alias = alias;
 	}
 
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}    
+	
 	
 
 }

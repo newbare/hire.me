@@ -4,7 +4,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
-
+/**
+ * 
+ * @author Jefferson Leite
+ *
+ */
 @ComponentScan("br.com.bemobi")
 @EnableAutoConfiguration
 @SpringBootApplication

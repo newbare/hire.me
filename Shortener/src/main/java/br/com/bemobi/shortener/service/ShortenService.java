@@ -55,6 +55,7 @@ public class ShortenService {
 		setStatistics(initTime, endTime, listStatistic);
 		shorten = shortenRepository.save(new Shorten(url, listStatistic));
 		shorten.setAlias(encodeAlias(shorten.getId()));
+		shorten.setClick(0l);
 		shorten.setUrl(url);			
 		
 		return shorten;
@@ -74,7 +75,7 @@ public class ShortenService {
 	}
 
 	private void setStatistics(Long initTime, Long endTime, List<Statistics> listStatistic) {
-		Statistics statistics = new Statistics(String.valueOf(endTime - initTime/1000d)+"ms");
+		Statistics statistics = new Statistics(String.valueOf(endTime - initTime)+"ms");
 		listStatistic.add(statistics);
 	}
 
@@ -126,7 +127,7 @@ public class ShortenService {
 			throw new ShortenException("Error update record");
 		}
 		Long endTime = getSystemTime();
-		Statistics statistics = new Statistics(String.valueOf(endTime - initTime/1000d)+"ms");
+		Statistics statistics = new Statistics(String.valueOf(endTime - initTime)+"ms");
 		shorten.getStatistics().add(statistics);
 		updatedShorten.setClick(shorten.getClick()==null?1:shorten.getClick()+1);
 		updatedShorten = shortenRepository.saveAndFlush(updatedShorten);

@@ -40,7 +40,7 @@ public class ShortenController {
 			return new ResponseEntity<ResponseErrorDTO>(new ResponseErrorDTO(alias,e.getStatus().value(), e.getMessage() ), HttpStatus.BAD_REQUEST );
 		}
 		
-		return new ResponseEntity<Shorten>(shorten, HttpStatus.OK);
+		return new ResponseEntity<Shorten>(shorten, HttpStatus.CREATED);
 	}
 
 	@RequestMapping(value = "/retrive", method = RequestMethod.GET)
@@ -68,7 +68,7 @@ public class ShortenController {
 			return new ResponseEntity<ResponseErrorDTO>(new ResponseErrorDTO(HttpStatus.BAD_REQUEST.value(),"No results found" ), HttpStatus.BAD_REQUEST );
 		}
 		
-	    return new ResponseEntity<List<Shorten>>(listShorten, HttpStatus.SEE_OTHER);
+	    return new ResponseEntity<List<Shorten>>(listShorten, HttpStatus.OK);
 	}
 		
 	private long getSystemTime() {

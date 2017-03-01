@@ -8,9 +8,10 @@ Caso não queira utilizar o Cliente da aplicação recomendo o uso do Postman!
 Caso queira utilizar um servidor de aplicação, ex: wildfly, será necessário configurar o datasource para acessar o seguinte JNDI:
 <br>
 spring.datasource.jndi-name=java:jboss/datasources/shortenerDB basta ativar o profile de produção:
-<br>
-mvn -Dspring.profiles.active=dev-persistent spring-boot:run
-rodar Wildfly por exemplo.
+<br>                        
+mvn -Dspring.profiles.active=dev-persistent spring-boot:run <br>
+rodar Wildfly por exemplo:<br>
+mvn spring-boot:run -Drun.jvmArguments="-Dspring.profiles.active=production
 
 
 ## Maven 
@@ -45,7 +46,7 @@ console H2: http://localhost:8080/console
 
 ## Bonus Points
 
-1. Crie *testcases* para todas as funcionalidades criadas
+1. Crie *testcases* para todas as funcionalidades criadas<br>
    Feito
 2. Crie um *endpoint* que mostre as dez *URL's* mais acessadas <br>R = http://localhost:8080/dashaboard
 

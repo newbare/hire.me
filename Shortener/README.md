@@ -7,7 +7,22 @@ Caso não queira utilizar o Cliente da aplicação recomendo o uso do Postman!
 <br>
 Caso queira utilizar um servidor de aplicação, ex: wildfly, será necessário configurar o datasource para acessar o seguinte JNDI:
 <br>
-spring.datasource.jndi-name=java:jboss/datasources/shortenerDB basta alterar a ultima linha do arquivo application.properties
+spring.datasource.jndi-name=java:jboss/datasources/shortenerDB basta ativar o profile de produção:
+<br>
+mvn -Dspring.profiles.active=dev-persistent spring-boot:run
+rodar Wildfly por exemplo.
+
+
+## Maven 
+Criação do  H2 para desenvolvimento:
+<br>
+mvn -Dspring.datasource.url=jdbc:h2:./shortenDB -Dspring.jpa.hibernate.ddl-auto=create clean test
+Run: <br>
+mvn spring-boot:run
+<br>
+Rodar o banco com persistência:
+<br>
+mvn -Dspring.profiles.active=dev-persistent spring-boot:run
 
 ## Endpoints
 POST: http://localhost:8080/create?url= <br>
@@ -23,7 +38,8 @@ console H2: http://localhost:8080/console
 3. Spring Data JPA
 4. Spring Web MVC
 5. SGDB Relacional H2 com servelet de console: http://localhost:8080/console 
-6. Postman client Rest e Soap: https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop
+6. YAML - Configuração e profiles https://hoserdude.com/2014/06/19/spring-boot-configurationproperties-and-profile-management-using-yaml/
+7. Postman client Rest e Soap: https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop
 
 
 

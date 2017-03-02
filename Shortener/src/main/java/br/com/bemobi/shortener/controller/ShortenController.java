@@ -63,7 +63,7 @@ public class ShortenController {
 	@RequestMapping(value = "/dashaboard", method = RequestMethod.GET)
 	public ResponseEntity<?> dashaboard()  {
 		List<Shorten>listShorten = new ArrayList<>();
-		listShorten = service.findAll();
+		listShorten = service.findTenMore();
 		if(listShorten==null || listShorten.isEmpty()){
 			return new ResponseEntity<ResponseErrorDTO>(new ResponseErrorDTO(HttpStatus.BAD_REQUEST.value(),"No results found" ), HttpStatus.BAD_REQUEST );
 		}

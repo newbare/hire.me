@@ -71,7 +71,11 @@ public class ShortenService {
 	}
 
 	public List<Shorten>findTenMore(){
-		return shortenRepository.queryFirst10Byclick(new PageRequest(0,2));
+		List<Shorten>list = shortenRepository.queryFirst10Byclick(new PageRequest(0,10));
+		for (Shorten shorten : list) {
+			shorten.setAlias(utilHash.encrypt(shorten.getId()));
+		}
+		return list;		
 	}
 
 	private void setStatistics(Long initTime, Long endTime, List<Statistics> listStatistic) {
@@ -115,7 +119,11 @@ public class ShortenService {
 
 	@Transactional
 	public List<Shorten> findAll() {
-		return shortenRepository.findAll();
+		List<Shorten>list = shortenRepository.findAll();
+		for (Shorten shorten : list) {
+			shorten.setAlias(utilHash.encrypt(shorten.getId()));
+		}
+		return list;
 	}
 
 	

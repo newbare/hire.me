@@ -15,6 +15,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
@@ -106,13 +108,14 @@ public class Shorten implements Serializable{
 	}
 
 	public String getUrl() {
+		if(StringUtils.isNotEmpty(defaultUrl))
+			url = defaultUrl;
 		return url;
 	}
 
 	public void setUrl(String url) {
 		this.url = url;
-	}    
-	
+	}    	
 	
 
 }

@@ -1,7 +1,25 @@
 $(document).ready(function() {
 	$(function () { $("input,select,textarea").not("[type=submeter]").jqBootstrapValidation(); } );
 	
+	carregarGrid();	
+		
 });
+
+//http://jsfiddle.net/8svjf80g/1/
+function carregarGrid(){
+	$.ajax({
+		url : 'http://localhost:8080/dashaboard',			
+		type : 'GET',
+		dataType: 'json',
+		success : function(datas, textStatus) {			
+			    
+				$('#table').bootstrapTable({
+			        data: datas
+			    });
+			
+		}
+	});
+}
 
 function ajaxBuscaStatus() {
 	
@@ -45,11 +63,12 @@ function ajaxBuscaStatus() {
 		data : dataAjax,
 		type : postOrGet,
 		success : function(data, textStatus) {
-			var ret = JSON.stringify(data)
+			var ret = JSON.stringify(data,null, 4);			
 			$('#responseService').val(ret);
 		},
 		error : function(data, textStatus) {
-			$('#responseService').val(data.responseText);
+			var ret = JSON.stringify(data,null, 4);			
+			$('#responseService').val(ret);
 		}
 	});
 }
@@ -83,7 +102,9 @@ function habiliadesabilita(){
 		$("#aliasId").prop('disabled',true)
 		$("#aliasId").attr("required", false);
 		$("#urlId").attr("required", false);
-	}
-	
-	
+	}	
 }
+
+function LinkFormatter(value, row, index) {
+	  return "<a href='localhost:8080/retrive?alias="+row.alias+"' target='_blank'>"+value+"</a>";
+	}

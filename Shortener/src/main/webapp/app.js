@@ -2,7 +2,8 @@ $(document).ready(function() {
 	$(function () { $("input,select,textarea").not("[type=submeter]").jqBootstrapValidation(); } );
 	
 	carregarGrid();	
-		
+	
+	
 });
 
 //http://jsfiddle.net/8svjf80g/1/
@@ -15,8 +16,7 @@ function carregarGrid(){
 			    
 				$('#table').bootstrapTable({
 			        data: datas
-			    });
-			
+			    });			
 		}
 	});
 }
@@ -71,6 +71,7 @@ function ajaxBuscaStatus() {
 			$('#responseService').val(ret);
 		}
 	});
+	carregarGrid();
 }
 
 function limpar() {
@@ -78,6 +79,7 @@ function limpar() {
 	$('#urlId').val("");
 	$('#aliasId').val("");
 	$('#responseService').val("");	
+	carregarGrid();
 }
 
 function habiliadesabilita(){
@@ -106,5 +108,6 @@ function habiliadesabilita(){
 }
 
 function LinkFormatter(value, row, index) {
-	  return "<a href='localhost:8080/retrive?alias="+row.alias+"' target='_blank'>"+value+"</a>";
+	  return "<a href='http://localhost:8080/retrive?alias="+row.alias+"' target='_blank'>"+value+"</a>";
 	}
+

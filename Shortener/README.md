@@ -50,7 +50,9 @@ console H2: http://localhost:8080/console
    Feito
 2. Crie um *endpoint* que mostre as dez *URL's* mais acessadas <br>R = http://localhost:8080/dashaboard
 
-3. Crie um *client* para chamar sua API <br> R =  foi utlizada a ferramanta Postman: Postman client Rest e Soap:  https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop
+3. Crie um *client* para chamar sua API <br> 
+R =  localhost:8080/client.html (Bootstrap + Jquery)<br>
+foi utlizada a ferramanta Postman: Postman client Rest e Soap:  https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop
 
 4. Faça um diagrama de sequencia da implementação feita nos casos de uso (Dica, use o https://www.websequencediagrams.com/)
   ![Short URL](https://github.com/newbare/hire.me/blob/master/Shortener/src/main/resources/docs/Shorten.png)

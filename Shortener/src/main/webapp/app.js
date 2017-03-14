@@ -1,8 +1,15 @@
 $(document).ready(function() {
-	$(function () { $("input,select,textarea").not("[type=submeter]").jqBootstrapValidation(); } );
+	$(function () { 
+		$("input,select,textarea").not("[type=submeter]").jqBootstrapValidation(); 
+		
+	} );
 	
 	carregarGrid();	
 	
+	$("#requisicao").submit(function( event ) {
+		ajaxBuscaStatus();
+		return false;
+		});
 	
 });
 
@@ -72,6 +79,7 @@ function ajaxBuscaStatus() {
 		}
 	});
 	carregarGrid();
+	return false;
 }
 
 function limpar() {
